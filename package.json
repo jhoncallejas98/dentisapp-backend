@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "Rest API para web de Dentisapp",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node --watch index.js"
+
   },
   "keywords": [
     "express",
@@ -16,5 +18,8 @@
     "ecommerce"
   ],
   "author": "Jhon Callejas Villarreal <jhoncallejas1998@hotmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
