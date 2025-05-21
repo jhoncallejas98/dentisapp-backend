@@ -5,7 +5,7 @@ const router = Router();  // preparandolo para definir rutas
 
 // define las rutas de acceso 
 // toca definir cuantos alcanza para el proyecto de nosotros, no  todos se necesitan 
-router.get('/api/products', (req, res)=> {
+router.get('/p/products', (req, res)=> {
     res.send( 'Obtiene todos los productos')
 });
 router.post('/api/products', (req, res)=> {
