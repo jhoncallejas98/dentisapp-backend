@@ -3,10 +3,13 @@
 import express from 'express';  //ESModule
 import product from './routes/product.route.mjs'
 import dbConnect from './config/mongo.config.mjs'; // importamos la conexion a la base de datos. 
+import appoiment from  './routes/appoiment.route.mjs'
 
 // Paso 2: Ejecutar express
 const app = express();
+app.use(express.json()); // habilito el interprete de formato json
 app.use(product); // implementar la ruta como un Middleware de express
+app.use(appoiment); // implementa la ruta de appoiment. 
 
 //invocar la cofiguracion de la conexion a la base de datos. 
 dbConnect();
