@@ -1,7 +1,18 @@
-const createAppoiment =  (req, res)=> {
+import appointmentModel from "../models/appoiment.models.mjs";
+
+const createAppoiment =  async (req, res)=> {
     const inputData = req.body;
-    console.log(inputData)
-    res.send(inputData)
+    //controla las excepciones de la consulta. 
+    try {
+        const registeredAppoiment =  await appointmentModel.create(inputData);
+        console.log(registeredAppoiment);
+        res.status(201).json(registeredAppoiment);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({"msg": 'Error al registrar la cita'});
+    }
+
 }
 
 const getAppoiment = (req, res)=> {
