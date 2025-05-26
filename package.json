@@ -2,7 +2,7 @@
   "name": "dentisapp-backend",
   "version": "1.0.0",
   "description": "Rest API para web de Dentisapp",
-  "main": "index.js",
+  "main": "index.mjs",
   "type": "module",
   "scripts": {
     "dev": "node --watch ./src/index.mjs"
