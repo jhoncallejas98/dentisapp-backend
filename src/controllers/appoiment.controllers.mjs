@@ -4,6 +4,13 @@ const createAppoiment =  async (req, res)=> {
     const inputData = req.body;
     //controla las excepciones de la consulta. 
     try {
+        // antes de registrar verificar si es usuario existe
+        const patienteFound = await appointmentModel.findOne({patient: inputData.patient});
+        if (patienteFound){
+            return res.status(404).json({msg: "el usuario ya existe"})
+        }
+
+        // paso 2: registrar al usarui
         const registeredAppoiment =  await appointmentModel.create(inputData);
         console.log(registeredAppoiment);
         res.status(201).json(registeredAppoiment);
