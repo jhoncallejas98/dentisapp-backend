@@ -22,22 +22,81 @@ const createAppoiment =  async (req, res)=> {
 
 }
 
-const getAppoiment = (req, res)=> {
-    res.send( 'Obtiene las citas')
+const getAppoiment = async (req, res)=> {
+    try {
+        const data = await appointmentModel.find({})
+        res.status(201).json(data)
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({msg: 'error no se pudo obtener el listado de usuarios'})
+    }
+
+
+
 }
 
-const updateAppoiment  =(req, res)=> {
-    res.send( 'Actualizacion de las citas')
-}
+// const updateAppoiment  =(req, res)=> {
+//     res.send( 'Actualizacion de las citas')
+// }
 
 const updateAllAppoiment = (req, res)=> {
     res.send( 'Actualizacion total de todas las citas')
 }
 
 const deleteAppoiment =  (req, res)=> {
-    res.send( 'Elimina una cita')
+    const appoimentId = req.params.id;
+    appointmentModel.findByIdAndDelete(appoimentId)
+        .then((deletedAppoiment) => {
+            if (!deletedAppoiment) {
+                return res.status(404).json({ msg: 'No se encontró la cita para eliminar' });
+            }
+            res.json({ msg: 'Cita eliminada exitosamente' });
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).json({ msg: "Error al eliminar la cita" });
+        });
 }
+
+
+const getAppoimentById = async (req, res) => {
+    try {
+        const appoimentId = req.params.id;
+        const data = await appointmentModel.findById(appoimentId);
+
+        if (!data) {
+            return res.status(404).json({ msg: 'No se encontró la cita' });
+        }
+        res.json(data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Error al obtener la cita por id" });
+    }
+}
+
+const updateAppoimentById = async (req, res) => {
+    try {
+        const appoimentId = req.params.id;
+        const inputData = req.body;
+
+        const updatedAppoiment = await appointmentModel.findByIdAndUpdate(appoimentId, inputData, { new: true });
+
+        if (!updatedAppoiment) {
+            return res.status(404).json({ msg: 'No se encontró la cita para actualizar' });
+        }
+        res.json(updatedAppoiment);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Error al actualizar la cita por id" });
+    }
+}
+
 // esta exportando las funcionalidas de este archvio usando el export 
 export {
-    createAppoiment, getAppoiment, updateAppoiment, updateAllAppoiment, deleteAppoiment
+    createAppoiment,
+    getAppoiment,
+    updateAllAppoiment,
+    deleteAppoiment,
+    getAppoimentById,
+    updateAppoimentById // <-- esta sí existe
 }
