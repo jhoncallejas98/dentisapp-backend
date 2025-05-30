@@ -16,7 +16,6 @@ const usersSchema = new mongoose.Schema({
         type: String,
         trim: true,
         minLength:[7,"la contraseña debe de tener minimo 7 caracteres"],
-        maxLength: [13,"la contraseña debe de tener maximo 13 caracteres"],
         requiered:[true, "la contraseña es obligario"]
     },
     role: {
