@@ -1,4 +1,4 @@
-import appointmentModel from "../models/appoiment.models.mjs";
+import appointmentModel from "../schemas/appoiment.schemas.mjs";
 
 const createAppoiment =  async (req, res)=> {
     const inputData = req.body;
