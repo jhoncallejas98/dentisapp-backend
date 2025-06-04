@@ -10,7 +10,7 @@ import auth from './routes/auth.router.mjs'; // importamos la ruta de autenticac
 // Paso 2: Ejecutar express
 const app = express();
 app.use(express.json()); // habilito el interprete de formato json
-app.use(product); // implementar la ruta como un Middleware de express
+// app.use(product); // implementar la ruta como un Middleware de express
 app.use(appoiment); // implementa la ruta de appoiment. 
 app.use(disponibilidad); // implementar ruta de disponibilidad.
 app.use(Users) // implementamos usuarios 
