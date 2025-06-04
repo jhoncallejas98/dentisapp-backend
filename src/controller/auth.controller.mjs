@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import userModel from '../schemas/User.schema.mjs';
-import jwt from 'jsonwebtoken';
+import { generateToken } from '../helpers/jwt.helper.mjs';
 // autenticación
 const userLogin = async (req, res) => {
     // paso 1: obtener los datos del body
@@ -26,8 +26,9 @@ const userLogin = async (req, res) => {
             email: userFound.email,
             role: userFound.role
         };
-        const JWT_SECRET = 'jdjkjhkdhj9ux';
-        const token = jwt.sign(payload, JWT_SECRET, {expiresIn: '5h'})
+
+        const token = generateToken(payload);
+
 
 
         // eliminar datos sensibles antes de enviar la respuesta
@@ -45,4 +46,11 @@ const userLogin = async (req, res) => {
     }
 };
 
-export { userLogin };
+const reNewToken = (req, res) => {
+    const payload = req.authUser;
+    const token = generateToken(payload);
+    res.json({token})
+
+};
+
+export { userLogin, reNewToken };
